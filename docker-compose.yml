@@ -1,0 +1,58 @@
+
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: b2b-order-api_app
+        container_name: b2b_app
+        restart: unless-stopped
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        ports:
+            - "9000:9000"
+            - "8000:8000"
+        environment:
+            - APP_ENV=local
+            - APP_DEBUG=true
+            - APP_URL=http://localhost:9000
+            - DB_CONNECTION=mysql
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_DATABASE=b2b
+            - DB_USERNAME=root
+            - DB_PASSWORD=root
+            - CACHE_STORE=redis
+            - REDIS_CLIENT=predis
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+        depends_on:
+            - mysql
+            - redis
+
+    mysql:
+        image: mysql:8.0
+        container_name: b2b_mysql
+        restart: unless-stopped
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: b2b
+        volumes:
+            - mysql_data:/var/lib/mysql
+
+    redis:
+        image: redis:alpine
+        container_name: b2b_redis
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis_data:/data
+
+volumes:
+    mysql_data:
+    redis_data:
