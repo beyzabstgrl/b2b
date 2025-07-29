@@ -6,22 +6,11 @@ Laravel 11 ile geliştirilmiş ve Docker Compose ile konteynerize edilmiş basit
 
 ---
 
-## 📋 İçindekiler
-
-- [🛠️ Ön Koşullar](#ön-koşullar)
-- [🚀 Kurulum ve Çalıştırma](#kurulum-ve-çalıştırma)
-- [👥 Örnek Kullanıcılar](#örnek-kullanıcılar)
-- [📌 API Endpointleri](#api-endpointleri)
-- [📂 Postman Collection](#postman-collection)
-- [⭐ Bonus Özellikler](#bonus-özellikler)
-
----
 
 ## 🛠️ Ön Koşullar
 
 - Docker & Docker Compose
-- En az **4 GB RAM**
-- Git CLI
+
 
 ---
 
@@ -53,22 +42,25 @@ phpMyAdmin: http://localhost:8081
 👥 Örnek Kullanıcılar
 Rol	Email	Şifre
 Admin	admin@example.com	password123
-Customer	alice@example.com	secret123
-Customer	bob@example.com	secret123
+Customer	ali@example.com	secret123
+Customer	zeynep@example.com	secret123
 
-📌 API Endpointleri
-Kategori	Method	Endpoint	Açıklama	Erişim
-Authentication	POST	/api/register	Kullanıcı kaydı	Herkes
-POST	/api/login	Giriş yap ve token al	Herkes
-POST	/api/logout	Token ile çıkış	Giriş yapmış kullanıcı
-Ürün İşlemleri	GET	/api/products	Tüm ürünleri listele	Herkes
-GET	/api/products/{id}	Belirli ürünü getir	Herkes
-POST	/api/products	Yeni ürün oluştur	Sadece Admin
-PUT	/api/products/{id}	Ürünü güncelle	Sadece Admin
-DELETE	/api/products/{id}	Ürünü sil	Sadece Admin
-Sipariş İşlemleri	GET	/api/orders	Siparişleri listele	Admin: tüm / Customer: kendi
-POST	/api/orders	Yeni sipariş oluştur	Sadece Customer
-GET	/api/orders/{id}	Sipariş detayını getir	Admin veya ilgili Customer
+## 📌 API Endpointleri
+
+| Kategori         | Method | Endpoint              | Açıklama                      | Erişim                                 |
+|------------------|--------|------------------------|-------------------------------|----------------------------------------|
+| Authentication   | POST   | /api/register          | Kullanıcı kaydı               | Herkes                                 |
+|                  | POST   | /api/login             | Giriş yap ve token al         | Herkes                                 |
+|                  | POST   | /api/logout            | Token ile çıkış               | Giriş yapmış kullanıcı                 |
+| Ürün İşlemleri   | GET    | /api/products          | Tüm ürünleri listele          | Herkes                                 |
+|                  | GET    | /api/products/{id}     | Belirli ürünü getir           | Herkes                                 |
+|                  | POST   | /api/products          | Yeni ürün oluştur             | Sadece Admin                           |
+|                  | PUT    | /api/products/{id}     | Ürünü güncelle                | Sadece Admin                           |
+|                  | DELETE | /api/products/{id}     | Ürünü sil                     | Sadece Admin                           |
+| Sipariş İşlemleri| GET    | /api/orders            | Siparişleri listele           | Admin: tüm / Customer: kendi           |
+|                  | POST   | /api/orders            | Yeni sipariş oluştur          | Sadece Customer                        |
+|                  | GET    | /api/orders/{id}       | Sipariş detayını getir        | Admin veya ilgili Customer             |
+
 
 📂 Postman Collection
 Tüm API isteklerini test etmek için postman_collection.json dosyasını Postman’e import edebilirsiniz.
