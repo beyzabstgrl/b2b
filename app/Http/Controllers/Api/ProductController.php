@@ -41,12 +41,16 @@ class ProductController extends BaseController
     {
         $product = $this->service->store($request->validated());
 
+        Cache::store('redis')->forget('products');
+
         return response()->json(new ProductResource($product), 201);
     }
 
     public function update(UpdateProductRequest $request, $id): JsonResponse
     {
         $product = $this->service->update($id, $request->validated());
+
+        Cache::store('redis')->forget('products');
 
         return response()->json(new ProductResource($product));
     }
