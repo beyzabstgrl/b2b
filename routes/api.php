@@ -20,5 +20,5 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders',      [OrderController::class, 'index']);
     Route::post('/orders',     [OrderController::class, 'store'])->middleware('role:customer');
-    Route::get('/orders/{id}', [OrderController::class, 'show']);
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->middleware('check.order.access');
 });

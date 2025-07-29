@@ -63,7 +63,8 @@ Customer	zeynep@example.com	secret123
 
 
 📂 Postman Collection
-Tüm API isteklerini test etmek için postman_collection.json dosyasını Postman’e import edebilirsiniz.
+Postman ile hazırlanmış dökümantasyona aşağıdaki bağlantıdan ulaşabilirsiniz:
+https://documenter.getpostman.com/view/35013565/2sB3B7QExr
 
 ⭐ Bonus Özellikler
 Rol bazlı erişim kontrolü (Admin / Customer)

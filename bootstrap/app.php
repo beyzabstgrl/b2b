@@ -13,6 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'check.order.access' => \App\Http\Middleware\CheckOrderOwnership::class,
+
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

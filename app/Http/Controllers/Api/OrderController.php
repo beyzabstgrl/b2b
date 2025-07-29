@@ -50,15 +50,6 @@ class OrderController extends BaseController
     {
         $order = $this->service->find($id, ['items.product', 'user']);
 
-        if (! $order) {
-            return response()->json(['message' => 'Sipariş bulunamadı'], 404);
-        }
-
-        $user = Auth::user();
-        if ($user->role !== 'admin' && $order->user_id !== $user->id) {
-            return response()->json(['message' => 'Yetkiniz yok'], 403);
-        }
-
         return response()->json(new OrderResource($order));
     }
 }
