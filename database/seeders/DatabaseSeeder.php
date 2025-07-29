@@ -14,20 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Test kullanıcı
-        User::factory()->create([
-            'name'  => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            UserSeeder::class,
+            ProductSeeder::class,
+           // OrderSeeder::class,
         ]);
-
-        // Admin kullanıcı
-        User::updateOrCreate(
-            ['email' => 'admin@example.com'],
-            [
-                'name'     => 'Admin',
-                'password' => Hash::make('password123'),
-                'role'     => 'admin',
-            ]
-        );
     }
 }

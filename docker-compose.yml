@@ -1,5 +1,3 @@
-
-
 services:
     app:
         build:
@@ -52,6 +50,20 @@ services:
             - "6379:6379"
         volumes:
             - redis_data:/data
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: b2b_phpmyadmin
+        restart: unless-stopped
+        ports:
+            - "8081:80"
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: root
+        depends_on:
+            - mysql
 
 volumes:
     mysql_data:
