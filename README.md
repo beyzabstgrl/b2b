@@ -70,7 +70,12 @@ https://documenter.getpostman.com/view/35013565/2sB3B7QExr
 Rol bazlı erişim kontrolü (Admin / Customer)
 
 Laravel Sanctum ile token tabanlı kimlik doğrulama
+ - Unit ve Feature testleri `tests/` klasöründe yer alır.
+- FormRequest ile endpoint bazlı validation uygulanmıştır.
+- Laravel Resource sınıfları JSON çıktılarını yapılandırır.
 
+> **Not:** Testleri çalıştırmak için şu komutu kullanabilirsiniz:  
+> `docker compose exec app php artisan test`
 Docker ile hızlı kurulum
 
 phpMyAdmin ile kolay veritabanı yönetimi
