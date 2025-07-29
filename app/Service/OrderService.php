@@ -2,6 +2,7 @@
 namespace App\Service;
 
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Repository\OrderRepository;
 
@@ -19,7 +20,7 @@ class OrderService extends BaseService
 
     public function storeOrder(int $userId, array $items): Order
     {
-        // 1) Sipariş kaydı
+        // Sipariş
         $order = $this->repository->store([
             'user_id'     => $userId,
             'status'      => 'pending',
@@ -28,8 +29,7 @@ class OrderService extends BaseService
 
         $total = 0;
         foreach ($items as $item) {
-
-            $product = Product::findOrFail($item['product_id']);
+            $product = \App\Models\Product::findOrFail($item['product_id']);
             $qty     = $item['quantity'];
 
             if ($product->stock_quantity < $qty) {
@@ -38,19 +38,26 @@ class OrderService extends BaseService
 
             $unitPrice = $product->price;
 
-            $order->items()->attach($product->id, [
+            //OrderItem
+            $order->items()->create([
+                'product_id' => $product->id,
                 'quantity'   => $qty,
                 'unit_price' => $unitPrice,
             ]);
 
+            // Stok
             $product->decrement('stock_quantity', $qty);
 
             $total += $unitPrice * $qty;
         }
 
+        //  Toplamı
         $this->repository->update($order->id, ['total_price' => $total]);
 
-        return $this->repository->find($order->id, ['items.product', 'user']);
+
+        return $this->repository->find($order->id, [
+            'items.product', 'user'
+        ]);
     }
 
 }

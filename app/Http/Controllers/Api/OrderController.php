@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\BaseController;
 
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Resources\OrderResource;
 use App\Service\OrderService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class OrderController extends BaseController
 
             : $this->service->findBy('user_id', $user->id);
 
-        return response()->json($orders);
+
+        return response()->json(OrderResource::collection($orders));
     }
 
 
@@ -40,7 +42,7 @@ class OrderController extends BaseController
     {
         $order = $this->service->storeOrder(Auth::id(), $request->items);
 
-        return response()->json($order, 201);
+        return response()->json(new OrderResource($order), 201);
     }
 
 
@@ -57,6 +59,6 @@ class OrderController extends BaseController
             return response()->json(['message' => 'Yetkiniz yok'], 403);
         }
 
-        return response()->json($order);
+        return response()->json(new OrderResource($order));
     }
 }
